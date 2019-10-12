@@ -1,0 +1,41 @@
+#!/bin/sh
+
+set -e
+set -u
+
+# Prepare variables
+FILE=""
+NAME=""
+LABEL=""
+TYPE=""
+
+# Set variables from arguments
+while getopts 'f:n:l:t:' opt; do
+  case $opt in
+    f) FILE=$OPTARG ;;
+    n) NAME=$OPTARG ;;
+    l) LABEL=$OPTARG ;;
+    t) TYPE=$OPTARG ;;
+  esac
+done
+
+# Verify minimum requirements of Github is satisfied.
+if [ ! "$FILE" ] || [ ! "$NAME" ]; then
+  echo "Minimum file (-f) and name (-n) must be provided."
+  exit 1
+fi
+
+# Prepare header for content type.
+HEADER="X-Dummy: true"
+if [ "$TYPE" ]; then
+  HEADER="Content-Type: $TYPE"
+fi
+
+# Prepare url for upload.
+URL="$UPLOAD_URL?name=$(urlencode $NAME)"
+if [ "$LABEL" ]; then
+  URL="$URL&label=$(urlencode $LABEL)"
+fi
+
+# Perform upload.
+curl -s -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -H "$HEADER" --data-binary @$FILE "$URL" | jq .

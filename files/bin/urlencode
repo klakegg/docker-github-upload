@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# From https://stackoverflow.com/a/34407620/135001
+jq -nr --arg v "$*" '$v|@uri'
