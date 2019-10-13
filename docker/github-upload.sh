@@ -27,16 +27,20 @@ if [ "${INPUT_FILE:-}" ]; then
 elif [ "${INPUT_SCRIPT:-}" ]; then
   # Trigger script for upload.
   sh -c "${INPUT_SCRIPT}"
-else
+elif [ "${INPUT_PATH:-}" ]; then
   # Trigger script file for upload.
-  SCRIPT=${INPUT_PATH:-.github/publish.sh}
 
   # Check if file exists.
-  if [ ! -e $SCRIPT ]; then
-    echo "Unable to find '$SCRIPT'."
+  if [ ! -e $INPUT_PATH ]; then
+    echo "Unable to find '$INPUT_PATH'."
     exit 1
   fi
 
   # Trigger script for publishing.
-  source $SCRIPT
+  source $INPUT_PATH
+else
+  # Lack of configuration.
+  echo "Configuration is missing."
+  echo "Please see https://github.com/klakegg/github-upload for information."
+  exit 1
 fi
