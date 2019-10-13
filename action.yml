@@ -27,4 +27,4 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://klakegg/github-upload:0.8.0'
+  image: 'docker://klakegg/github-upload:0.8.1'

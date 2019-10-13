@@ -24,7 +24,7 @@ if [ "${INPUT_FILE:-}" ]; then
     -n "${INPUT_NAME:-}" \
     -l "${INPUT_LABEL:-}" \
     -t "${INPUT_TYPE:-}"
-elif [ "${INPUT_SCRIPT:-}"]; then
+elif [ "${INPUT_SCRIPT:-}" ]; then
   # Trigger script for upload.
   sh -c "${INPUT_SCRIPT}"
 else
