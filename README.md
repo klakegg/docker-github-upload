@@ -7,17 +7,17 @@
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-
+`.github/publish.sh`
 
 ```shell
 upload \
-    -f "target/distribution.zip" \
-    -n "distribution-${TAG}.zip" \
-    -l "Distribution (zip)" \
-    -t "application/zip"
+  -f "target/distribution.zip" \
+  -n "distribution-${TAG}.zip" \
+  -l "Distribution (zip)" \
+  -t "application/zip"
 ```
 
-* `-f` - File to upload.
+* `-f` - File to upload. (Mandatory)
 * `-n` - Filename when uploaded.
-* `-l` - Label replacing filename on release page. (Optional)
-* `-t` - Content type of the file. (Optional)
+* `-l` - Label replacing filename on release page.
+* `-t` - Content type of the file.

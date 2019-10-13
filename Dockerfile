@@ -14,6 +14,6 @@ ENV GITHUB_REF="" \
 
 COPY --from=tmp /files /
 
-RUN apk --no-cache add jq curl
+RUN apk --no-cache add $(ls /var/lib/pkgs/alpine)
 
-CMD ["sh", "/run.sh"]
+CMD ["sh", "/github-upload.sh"]

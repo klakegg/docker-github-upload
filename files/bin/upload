@@ -3,13 +3,13 @@
 set -e
 set -u
 
-# Prepare variables
+# Prepare variables.
 FILE=""
 NAME=""
 LABEL=""
 TYPE=""
 
-# Set variables from arguments
+# Set variables from arguments.
 while getopts 'f:n:l:t:' opt; do
   case $opt in
     f) FILE=$OPTARG ;;
@@ -20,15 +20,25 @@ while getopts 'f:n:l:t:' opt; do
 done
 
 # Verify minimum requirements of Github is satisfied.
-if [ ! "$FILE" ] || [ ! "$NAME" ]; then
-  echo "Minimum file (-f) and name (-n) must be provided."
+if [ ! "$FILE" ]; then
+  echo "Minimum file (-f) must be provided."
   exit 1
 fi
 
-# Prepare header for content type.
-HEADER="X-Dummy: true"
-if [ "$TYPE" ]; then
-  HEADER="Content-Type: $TYPE"
+# Verify existence of the provided file.
+if [ ! -e "$FILE" ]; then
+  echo "Unable to find '$FILE'."
+  exit 1
+fi
+
+# Default to use the filename of the provided file.
+if [ ! "$NAME" ]; then
+  NAME=$(basename $FILE)
+fi
+
+# Guess content type if not provided.
+if [ ! "$TYPE" ]; then
+  TYPE=$(file -b --mime-type $FILE)
 fi
 
 # Prepare url for upload.
@@ -38,4 +48,9 @@ if [ "$LABEL" ]; then
 fi
 
 # Perform upload.
-curl -s -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" -H "$HEADER" --data-binary @$FILE "$URL" | jq .
+curl -s \
+  -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" \
+  -H "Content-Type: $TYPE" \
+  -H "User-Agent: klakegg/docker-github-upload" \
+  --data-binary @$FILE \
+  "$URL" | jq .
