@@ -51,7 +51,7 @@ fi
 RESULT=$(curl -s \
   -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" \
   -H "Content-Type: $TYPE" \
-  -H "User-Agent: https://github.com/klakegg/docker-github-upload" \
+  -H "User-Agent: https://github.com/klakegg/github-upload" \
   --data-binary @$FILE \
   "$URL")
 

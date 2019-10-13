@@ -1,6 +1,6 @@
 FROM alpine:3.10 AS tmp
 
-ADD files /files
+ADD docker /files
 
 RUN chmod a+x /files/bin/*
 

@@ -1,7 +1,7 @@
 # Github Upload
 
 ```yaml
-- uses: klakegg/github-upload:v0.8.0
+- uses: klakegg/github-upload:v[VERSION]
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```

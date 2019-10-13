@@ -1,0 +1,30 @@
+name: 'Github Upload'
+description: '...'
+
+branding:
+  icon: 'upload'
+  color: 'green'
+
+inputs:
+  file:
+    description: 'File to upload.'
+    required: false
+  name:
+    description: 'Name of uploaded file.'
+    required: false
+  label:
+    description: 'Label of the uploaded file.'
+    required: false
+  type:
+    description: 'Content type of the uploaded file.'
+    required: false
+  script:
+    description: 'Script...'
+    required: false
+  path:
+    description: 'Script path...'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'docker://klakegg/github-upload:[VERSION]'
