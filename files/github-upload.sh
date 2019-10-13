@@ -24,11 +24,14 @@ if [ "${INPUT_FILE:-}" ]; then
     -n "${INPUT_NAME:-}" \
     -l "${INPUT_LABEL:-}" \
     -t "${INPUT_TYPE:-}"
-else
+elif [ "${INPUT_SCRIPT:-}"]; then
   # Trigger script for upload.
+  sh -c "${INPUT_SCRIPT}"
+else
+  # Trigger script file for upload.
   SCRIPT=${INPUT_PATH:-.github/publish.sh}
 
-  # Check if script exists.
+  # Check if file exists.
   if [ ! -e $SCRIPT ]; then
     echo "Unable to find '$SCRIPT'."
     exit 1

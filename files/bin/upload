@@ -48,9 +48,11 @@ if [ "$LABEL" ]; then
 fi
 
 # Perform upload.
-curl -s \
+RESULT=$(curl -s \
   -u "${GITHUB_ACTOR}:${GITHUB_TOKEN}" \
   -H "Content-Type: $TYPE" \
-  -H "User-Agent: klakegg/docker-github-upload" \
+  -H "User-Agent: https://github.com/klakegg/docker-github-upload" \
   --data-binary @$FILE \
-  "$URL" | jq .
+  "$URL")
+
+echo $RESULT | jq .
