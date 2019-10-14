@@ -3,7 +3,7 @@
 ## Static configuration
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.1
+- uses: klakegg/github-upload@v0.8.2
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -11,7 +11,7 @@
 ```
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.1
+- uses: klakegg/github-upload@v0.8.2
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -24,7 +24,7 @@
 ## Scripted configuration
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.1
+- uses: klakegg/github-upload@v0.8.2
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -35,7 +35,7 @@
 ```
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.1
+- uses: klakegg/github-upload@v0.8.2
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
