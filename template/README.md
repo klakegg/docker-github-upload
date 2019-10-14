@@ -21,6 +21,15 @@
     type: application/zip
 ```
 
+```yaml
+- uses: [REPO]@v[VERSION]
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    files: dist/*.zip
+```
+
+
 ## Scripted configuration
 
 ```yaml

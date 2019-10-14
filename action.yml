@@ -1,26 +1,33 @@
-name: 'Github Upload'
-description: '...'
+name: Github Upload
+description: Upload assets to Github with ease.
 
 branding:
-  icon: 'upload'
-  color: 'green'
+  icon: upload
+  color: green
 
 inputs:
   file:
-    description: 'File to upload.'
+    description: File to upload.
     required: false
   name:
-    description: 'Name of uploaded file.'
+    description: Name of uploaded file.
     required: false
   label:
-    description: 'Label of the uploaded file.'
+    description: Label of the uploaded file.
     required: false
   type:
-    description: 'Content type of the uploaded file.'
+    description: Content type of the uploaded file.
     required: false
+
+  files:
+    description: 'An expression to indicate files to upload.'
+    required: false
+    example: 'dist/*'
+
   script:
     description: 'Script...'
     required: false
+
   path:
     description: 'Script path...'
     required: false

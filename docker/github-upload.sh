@@ -32,6 +32,11 @@ if [ "${INPUT_FILE:-}" ]; then
     -n "$(echo ${INPUT_NAME:-} | envsubst)" \
     -l "$(echo ${INPUT_LABEL:-} | envsubst)" \
     -t "$(echo ${INPUT_TYPE:-} | envsubst)"
+elif [ "${INPUT_FILES:-}" ]; then
+  # Upload multiple files
+  for file in $(ls ${INPUT_FILES}); do
+    upload -f $file
+  done
 elif [ "${INPUT_SCRIPT:-}" ]; then
   # Trigger script for upload.
   sh -c "${INPUT_SCRIPT}"

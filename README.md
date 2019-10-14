@@ -21,6 +21,15 @@
     type: application/zip
 ```
 
+```yaml
+- uses: klakegg/github-upload@v0.8.2
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  with:
+    files: dist/*.zip
+```
+
+
 ## Scripted configuration
 
 ```yaml
