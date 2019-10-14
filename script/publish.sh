@@ -3,8 +3,6 @@
 set -e
 set -u
 
-REPO="klakegg/github-upload"
-
 # Build and tag docker image.
 docker build -t $REPO:$VERSION .
 docker tag $REPO:$VERSION $REPO:latest

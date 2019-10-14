@@ -1,10 +1,15 @@
 VERSION ?= "SNAPSHOT"
+REPO    ?= "klakegg/github-upload"
 
 build:
-	@docker build -t github-upload .
+	@docker build -t $(REPO):snapshot .
 
 prepare:
-	@VERSION=$(VERSION) sh script/prepare.sh
+	@VERSION="$(VERSION)" \
+		REPO="$(REPO)" \
+		sh script/prepare.sh
 
 publish:
-	@VERSION=$(VERSION) sh script/publish.sh
+	@VERSION="$(VERSION)" \
+		REPO="$(REPO)" \
+		sh script/publish.sh

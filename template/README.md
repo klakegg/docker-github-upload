@@ -3,7 +3,7 @@
 ## Static configuration
 
 ```yaml
-- uses: klakegg/github-upload@v[VERSION]
+- uses: [REPO]@v[VERSION]
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -11,12 +11,12 @@
 ```
 
 ```yaml
-- uses: klakegg/github-upload@v[VERSION]
+- uses: [REPO]@v[VERSION]
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     file: dist/project.zip
-    name: project.zip
+    name: project-${TAG}.zip
     label: Complete project package
     type: application/zip
 ```
@@ -24,7 +24,7 @@
 ## Scripted configuration
 
 ```yaml
-- uses: klakegg/github-upload@v[VERSION]
+- uses: [REPO]@v[VERSION]
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -35,7 +35,7 @@
 ```
 
 ```yaml
-- uses: klakegg/github-upload@v[VERSION]
+- uses: [REPO]@v[VERSION]
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:

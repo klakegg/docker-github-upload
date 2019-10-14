@@ -16,7 +16,7 @@
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     file: dist/project.zip
-    name: project.zip
+    name: project-${TAG}.zip
     label: Complete project package
     type: application/zip
 ```

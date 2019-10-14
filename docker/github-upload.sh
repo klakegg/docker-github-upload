@@ -19,25 +19,34 @@ fi
 
 if [ "${INPUT_FILE:-}" ]; then
   # Simple file upload.
+  file=$(echo ${INPUT_FILE} | envsubst)
+
+  # Check if file exists.
+  if [ ! -e $file ]; then
+    echo "Unable to find '$file'."
+    exit 1
+  fi
+
   upload \
-    -f "${INPUT_FILE}" \
-    -n "${INPUT_NAME:-}" \
-    -l "${INPUT_LABEL:-}" \
-    -t "${INPUT_TYPE:-}"
+    -f "${file}" \
+    -n "$(echo ${INPUT_NAME:-} | envsubst)" \
+    -l "$(echo ${INPUT_LABEL:-} | envsubst)" \
+    -t "$(echo ${INPUT_TYPE:-} | envsubst)"
 elif [ "${INPUT_SCRIPT:-}" ]; then
   # Trigger script for upload.
   sh -c "${INPUT_SCRIPT}"
 elif [ "${INPUT_PATH:-}" ]; then
   # Trigger script file for upload.
+  path=$(echo ${INPUT_PATH} | envsubst)
 
   # Check if file exists.
-  if [ ! -e $INPUT_PATH ]; then
-    echo "Unable to find '$INPUT_PATH'."
+  if [ ! -e $path ]; then
+    echo "Unable to find '$path'."
     exit 1
   fi
 
   # Trigger script for publishing.
-  source $INPUT_PATH
+  source $path
 else
   # Lack of configuration.
   echo "Configuration is missing."
