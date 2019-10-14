@@ -39,6 +39,8 @@
 
 ## Scripted configuration
 
+Example where the script is part of the step definition:
+
 ```yaml
 - uses: [REPO]@v[VERSION]
   env:
@@ -50,6 +52,8 @@
         -n project-${TAG}.zip
 ```
 
+Example where script is provided as a file in the repository:
+
 ```yaml
 - uses: [REPO]@v[VERSION]
   env:
@@ -58,20 +62,10 @@
     script_path: .github/uploads.sh
 ```
 
-``` shell
-#!/bin/sh
-
-folder=dist
-
-upload \
-  -f ${folder}/project.zip \
-  -n project-${TAG}.zip
-```
-
 
 ## Command: upload
 
-The `upload` command may be used in the script to perform the upload of an asset.
+The `upload` command may be used in the script to trigger upload of an asset.
 
 Example of use:
 

@@ -55,6 +55,7 @@ RESULT=$(curl -s \
   --data-binary @$FILE \
   "$URL")
 
+# Check result of upload
 if [ "$(echo $RESULT | jq -r .browser_download_url)" = "null" ]; then
   code=$(echo $RESULT | jq -r .errors[0].code)
 
@@ -68,6 +69,7 @@ if [ "$(echo $RESULT | jq -r .browser_download_url)" = "null" ]; then
   exit 1
 fi
 
+# Success!
 if [ "$FILE" = "$NAME" ]; then
   echo "Uploaded '$FILE'."
 else

@@ -7,7 +7,7 @@
 ### Single file
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.2
+- uses: klakegg/github-upload@v0.8.3
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -15,7 +15,7 @@
 ```
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.2
+- uses: klakegg/github-upload@v0.8.3
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -29,7 +29,7 @@
 ### Multiple files
 
 ```yaml
-- uses: klakegg/github-upload@v0.8.2
+- uses: klakegg/github-upload@v0.8.3
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -39,8 +39,10 @@
 
 ## Scripted configuration
 
+Example where the script is part of the step definition:
+
 ```yaml
-- uses: klakegg/github-upload@v0.8.2
+- uses: klakegg/github-upload@v0.8.3
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -50,28 +52,20 @@
         -n project-${TAG}.zip
 ```
 
+Example where script is provided as a file in the repository:
+
 ```yaml
-- uses: klakegg/github-upload@v0.8.2
+- uses: klakegg/github-upload@v0.8.3
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
     script_path: .github/uploads.sh
 ```
 
-``` shell
-#!/bin/sh
-
-folder=dist
-
-upload \
-  -f ${folder}/project.zip \
-  -n project-${TAG}.zip
-```
-
 
 ## Command: upload
 
-The `upload` command may be used in the script to perform the upload of an asset.
+The `upload` command may be used in the script to trigger upload of an asset.
 
 Example of use:
 
