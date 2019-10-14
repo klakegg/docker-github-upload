@@ -2,7 +2,7 @@ VERSION ?= "SNAPSHOT"
 REPO    ?= "klakegg/github-upload"
 
 build:
-	@docker build -t $(REPO):snapshot .
+	@docker build --no-cache -t $(REPO):snapshot .
 
 prepare:
 	@VERSION="$(VERSION)" \

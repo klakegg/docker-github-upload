@@ -10,9 +10,16 @@ fi
 
 # Fetch upload url.
 if [ ! "${UPLOAD_URL:-}" ]; then
-  export UPLOAD_URL=$(curl -s -u ${GITHUB_ACTOR}:${GITHUB_TOKEN} https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/tags/${TAG} \
-    | jq -r '.upload_url' \
-    | sed "s:{.*::g")
+  RESULT=$(curl -s \
+    -u ${GITHUB_ACTOR}:${GITHUB_TOKEN} \
+    https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/tags/${TAG})
+
+  if [ "$(echo $RESULT | jq -r .upload_url)" = "null" ]; then
+    echo "Error while fetching release information for tag '${TAG}': $(echo $RESULT | jq -r .message)"
+    exit 1
+  fi
+
+  export UPLOAD_URL=$(echo $RESULT | jq -r '.upload_url' | sed "s:{.*::g")
 fi
 
 # Verify upload url was found.
@@ -38,7 +45,7 @@ if [ "${INPUT_FILE:-}" ]; then
     -t "$(echo ${INPUT_TYPE:-} | envsubst)"
 elif [ "${INPUT_FILES:-}" ]; then
   # Upload multiple files
-  for file in $(ls ${INPUT_FILES}); do
+  for file in $(ls ${INPUT_FILES} | sort); do
     upload -f $file
   done
 elif [ "${INPUT_SCRIPT:-}" ]; then

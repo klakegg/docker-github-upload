@@ -55,4 +55,13 @@ RESULT=$(curl -s \
   --data-binary @$FILE \
   "$URL")
 
-echo $RESULT | jq .
+if [ "$(echo $RESULT | jq -r .browser_download_url)" = "null" ]; then
+  echo "Error while uploading '$FILE' as '$NAME': $(echo $RESULT | jq -r .message)"
+  exit 1
+fi
+
+if [ "$FILE" = "$NAME" ]; then
+  echo "Uploaded '$FILE'."
+else
+  echo "Uploaded '$FILE' as '$NAME'."
+fi
