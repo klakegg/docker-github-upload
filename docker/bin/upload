@@ -56,7 +56,15 @@ RESULT=$(curl -s \
   "$URL")
 
 if [ "$(echo $RESULT | jq -r .browser_download_url)" = "null" ]; then
-  echo "Error while uploading '$FILE' as '$NAME': $(echo $RESULT | jq -r .message)"
+  code=$(echo $RESULT | jq -r .errors[0].code)
+
+  if [ "$code" = "already_exists" ]; then
+    echo "A file named '$NAME' is already uploaded to the release."
+  else
+    echo "Error while uploading '$FILE' as '$NAME': $(echo $RESULT | jq -r .message)"
+    echo $RESULT | jq .
+  fi
+
   exit 1
 fi
 

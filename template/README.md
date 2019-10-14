@@ -1,6 +1,10 @@
 # Github Upload
 
+
 ## Static configuration
+
+
+### Single file
 
 ```yaml
 - uses: [REPO]@v[VERSION]
@@ -20,6 +24,9 @@
     label: Complete project package
     type: application/zip
 ```
+
+
+### Multiple files
 
 ```yaml
 - uses: [REPO]@v[VERSION]
@@ -61,7 +68,12 @@ upload \
   -n project-${TAG}.zip
 ```
 
+
 ## Command: upload
+
+The `upload` command may be used in the script to perform the upload of an asset.
+
+Example of use:
 
 ```shell
 upload \
@@ -71,6 +83,8 @@ upload \
   -t "application/zip"
 ```
 
+Arguments:
+
 * `-f` - File to upload. (Mandatory)
 * `-n` - Filename when uploaded.
 * `-l` - Label replacing filename on release page.
@@ -79,5 +93,7 @@ upload \
 
 ## Variables
 
-* `TAG`
-* `UPLOAD_URL`
+The following extra variables are made available during execution:
+
+* `TAG` - Git tag extracted from the provided `GITHUB_REF`, e.g. `v1.0`.
+* `UPLOAD_URL` - URL used to upload assets.

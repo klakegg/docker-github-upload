@@ -9,29 +9,36 @@ inputs:
   file:
     description: File to upload.
     required: false
+    example: distribution.zip
   name:
     description: Name of uploaded file.
     required: false
+    example: distribution-${TAG}.zip
   label:
     description: Label of the uploaded file.
     required: false
+    exammple: Complete distribution (zip)
   type:
     description: Content type of the uploaded file.
     required: false
+    example: application/zip
 
   files:
-    description: 'An expression to indicate files to upload.'
+    description: An expression to indicate files to upload.
     required: false
-    example: 'dist/*'
+    example: dist/*
 
   script:
-    description: 'Script...'
+    description: Script performing uploads.
     required: false
+    example: |
+      upload -f distribution.zip
 
   script_path:
-    description: 'Script path...'
+    description: Path to a script performing uploads.
     required: false
+    example: .github/uploads.sh
 
 runs:
-  using: 'docker'
+  using: docker
   image: 'docker://klakegg/github-upload:0.8.2'
