@@ -48,7 +48,7 @@
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
-    path: .github/uploads.sh
+    script_path: .github/uploads.sh
 ```
 
 ``` shell

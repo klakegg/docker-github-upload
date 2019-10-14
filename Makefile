@@ -9,7 +9,7 @@ prepare:
 		REPO="$(REPO)" \
 		sh script/prepare.sh
 
-publish:
+publish: prepare
 	@VERSION="$(VERSION)" \
 		REPO="$(REPO)" \
 		sh script/publish.sh

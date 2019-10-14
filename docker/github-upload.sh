@@ -4,12 +4,16 @@ set -e
 set -u
 
 # Extract tag.
-export TAG=$(echo $GITHUB_REF | sed "s:.*/::g")
+if [ ! "${TAG:-}" ]; then
+  export TAG=$(echo $GITHUB_REF | sed "s:.*/::g")
+fi
 
 # Fetch upload url.
-export UPLOAD_URL=$(curl -s -u ${GITHUB_ACTOR}:${GITHUB_TOKEN} https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/tags/${TAG} \
-  | jq -r '.upload_url' \
-  | sed "s:{.*::g")
+if [ ! "${UPLOAD_URL:-}" ]; then
+  export UPLOAD_URL=$(curl -s -u ${GITHUB_ACTOR}:${GITHUB_TOKEN} https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/tags/${TAG} \
+    | jq -r '.upload_url' \
+    | sed "s:{.*::g")
+fi
 
 # Verify upload url was found.
 if [ ! "$UPLOAD_URL" ]; then
@@ -40,9 +44,9 @@ elif [ "${INPUT_FILES:-}" ]; then
 elif [ "${INPUT_SCRIPT:-}" ]; then
   # Trigger script for upload.
   sh -c "${INPUT_SCRIPT}"
-elif [ "${INPUT_PATH:-}" ]; then
+elif [ "${INPUT_SCRIPT_PATH:-}" ]; then
   # Trigger script file for upload.
-  path=$(echo ${INPUT_PATH} | envsubst)
+  path=$(echo ${INPUT_SCRIPT_PATH} | envsubst)
 
   # Check if file exists.
   if [ ! -e $path ]; then

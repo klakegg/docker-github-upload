@@ -28,7 +28,7 @@ inputs:
     description: 'Script...'
     required: false
 
-  path:
+  script_path:
     description: 'Script path...'
     required: false
 
