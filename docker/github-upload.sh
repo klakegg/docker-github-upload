@@ -46,7 +46,9 @@ if [ "${INPUT_FILE:-}" ]; then
 elif [ "${INPUT_FILES:-}" ]; then
   # Upload multiple files
   for file in $(ls ${INPUT_FILES} | sort); do
-    upload -f $file
+    upload \
+      -f $file
+      -t "$(echo ${INPUT_TYPE:-} | envsubst)"
   done
 elif [ "${INPUT_SCRIPT:-}" ]; then
   # Trigger script for upload.
