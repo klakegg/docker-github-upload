@@ -2,6 +2,8 @@
 
 This action assists you in uploading your asset(s) to your project release page. You are free to choose between using [static configuration](#static-configuration) (with support for variables) and [scripted configuration](#scripted-configuration) depending on what you need for your project.
 
+Want to upload from your own build server? [Yes, it is supported.](#usage-outside-github)
+
 
 ## Static configuration
 
@@ -45,9 +47,9 @@ Example where extra information is provided, and where the uploaded filename con
 
 ### Multiple files
 
-Parameter `files` is used to upload multiple files at once. This implementation passes the paramter to [ls](https://www.gnu.org/software/coreutils/ls) for discovery of files.
+Parameter `files` is used to upload multiple files at once. This implementation passes the parameter to [ls](https://www.gnu.org/software/coreutils/ls) for discovery of files.
 
-Paramter `type` may be used to pass on content type, however other paramters are not supported. Scipted configuration may be an option if you find this too limiting.
+Parameter `type` may be used to pass on content type, however other parameters are not supported. Scipted configuration may be an option if you find this too limiting.
 
 Example of uploading zip files made available in a defined folder:
 
@@ -121,3 +123,17 @@ The following extra variables are made available during execution:
 
 * `TAG` - Git tag extracted from the provided `GITHUB_REF`, e.g. `v1.0`.
 * `UPLOAD_URL` - URL used to upload assets.
+
+
+## Usage outside Github
+
+This project may be used also outside Github Actions to perform upload of assets to Github by using the [Docker image](https://hub.docker.com/r/klakegg/github-upload) used by the action.
+
+The following environment variables need to be provided to make this happen:
+
+* `GITHUB_REPOSITORY` - Repository where the project may be found, e.g. `klakegg/github-upload`.
+* `GITHUB_TOKEN` - Token provided by Github to get access.
+* `GITHUB_ACTOR` - The owner of `GITHUB_TOKEN`, e.g. `klakegg.`
+* `GITHUB_REF` or `TAG` - Tag reference when using `GITHUB_REF`, e.g. `refs/tags/v0.9.0` or simply the tag when using `TAG`, e.g. `v0.9.0`.
+
+All parameters and logic are the same as described above, except they have to be passed as environment variables prefixed with `INPUT_` and as uppercase. E.g. parameter `file` becomes environment variable `INPUT_FILE`.
