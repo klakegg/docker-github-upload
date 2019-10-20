@@ -41,4 +41,4 @@ inputs:
 
 runs:
   using: docker
-  image: 'docker://klakegg/github-upload:0.8.3'
+  image: 'docker://klakegg/github-upload:0.9.0'
