@@ -24,7 +24,7 @@ Available parameters:
 Simple example where the file is uploaded without extra information:
 
 ```yaml
-- uses: klakegg/github-upload@v0.9.0
+- uses: klakegg/github-upload@v0.9.1
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -34,7 +34,7 @@ Simple example where the file is uploaded without extra information:
 Example where extra information is provided, and where the uploaded filename contains the tag of the build:
 
 ```yaml
-- uses: klakegg/github-upload@v0.9.0
+- uses: klakegg/github-upload@v0.9.1
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -54,7 +54,7 @@ Parameter `type` may be used to pass on content type, however other parameters a
 Example of uploading zip files made available in a defined folder:
 
 ```yaml
-- uses: klakegg/github-upload@v0.9.0
+- uses: klakegg/github-upload@v0.9.1
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -74,7 +74,7 @@ Script for handling may be provided inline as part of the workflow definition us
 Example where the script is part of the step definition:
 
 ```yaml
-- uses: klakegg/github-upload@v0.9.0
+- uses: klakegg/github-upload@v0.9.1
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -87,7 +87,7 @@ Example where the script is part of the step definition:
 Example where script is provided as a file in the repository:
 
 ```yaml
-- uses: klakegg/github-upload@v0.9.0
+- uses: klakegg/github-upload@v0.9.1
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   with:
@@ -134,6 +134,6 @@ The following environment variables need to be provided to make this happen:
 * `GITHUB_REPOSITORY` - Repository where the project may be found, e.g. `klakegg/github-upload`.
 * `GITHUB_TOKEN` - Token provided by Github to get access.
 * `GITHUB_ACTOR` - The owner of `GITHUB_TOKEN`, e.g. `klakegg.`
-* `GITHUB_REF` or `TAG` - Tag reference when using `GITHUB_REF`, e.g. `refs/tags/v0.9.0` or simply the tag when using `TAG`, e.g. `v0.9.0`.
+* `GITHUB_REF` or `TAG` - Tag reference when using `GITHUB_REF`, e.g. `refs/tags/v0.9.1` or simply the tag when using `TAG`, e.g. `v0.9.1`.
 
 All parameters and logic are the same as described above, except they have to be passed as environment variables prefixed with `INPUT_` and as uppercase. E.g. parameter `file` becomes environment variable `INPUT_FILE`.
