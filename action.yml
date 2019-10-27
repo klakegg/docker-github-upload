@@ -2,7 +2,7 @@ name: Github Upload
 description: Upload assets to Github with ease.
 
 branding:
-  icon: upload
+  icon: upload-cloud
   color: green
 
 inputs:
